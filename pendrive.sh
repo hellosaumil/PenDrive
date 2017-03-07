@@ -86,7 +86,7 @@ then
           if [ -z "$s" -o "$s" == " " -o "$s" == "" ]
           then
                printf "\nReceiving file : $file\n"
-               curl -X POST --form "sharingType=download" --form "fileName=$file" "$server" --output "./PenDrive/$file"
+               curl -X POST --form "sharingType=download" --form "fileName=$file" "$server" --output "./$file"
 
                printf "\nFile Downloaded...!!!"
           else

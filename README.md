@@ -60,7 +60,8 @@ Beta 0.1
 
 # Author
 Written by Saumil Shah. https://hellosaumil.github.io
-More detilas about this project can be found at : https://github.com/hellosaumil/PenDrive
+<br> More details about this project can be found at : <a href="https://github.com/hellosaumil/PenDrive"> https://github.com/hellosaumil/PenDrive </a>
 
 # Reporintg Bugs
-Report bugs to https://github.com/hellosaumil/PenDrive/issues
+Report bugs to <a href="https://github.com/hellosaumil/PenDrive/issues"> https://github.com/hellosaumil/PenDrive/issues </a>
+

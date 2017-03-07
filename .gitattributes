@@ -1,1 +1,1 @@
-linguist-language=Shell
+*.rb linguist-language=Shell

@@ -29,7 +29,7 @@ Describes all Options of PenDrive on Cloud
 		-d		Download a File from PenDrive Cloud by providing a filename after -d option
 
 		-h		Provides help on how to use the pendrive command-line utility
-		
+
 		--server	User can provide servername explicitly as --server=["example.server-address.com"]		
 
 # Usage
@@ -45,23 +45,22 @@ alternatively,
 	pendrive   -l              --server="server.io"		# Lists all files on user-specified PenDrive Cloud Server
 	pendrive   -u   file.ext   --server="server.io"		# Upload a file to user-specified PenDrive Cloud Server
 	pendrive   -d   file.ext   --server="server.io"		# Download a file from user-specified PenDrive Cloud Server
-```	
+```
 # Examples
 ``` shell
 	pendrive
-	pendrive -h	
-	pendrive -l or pendrive -l --server="server.io" 
-	pendrive -u file.ext or pendrive -u file.ext --server="server.io" 
-	pendrive -d file.ext or pendrive -d file.ext --server="server.io" 
+	pendrive -h
+	pendrive -l or pendrive -l --server="server.io"
+	pendrive -u file.ext or pendrive -u file.ext --server="server.io"
+	pendrive -d file.ext or pendrive -d file.ext --server="server.io"
 ```
 
 # Version
 Beta 0.1
 
 # Author
-Written by Saumil Shah. https://hellosaumil.github.io
+Written by Saumil Shah. <a href="https://hellosaumil.github.io"> https://hellosaumil.github.io </a>
 <br> More details about this project can be found at : <a href="https://github.com/hellosaumil/PenDrive"> https://github.com/hellosaumil/PenDrive </a>
 
 # Reporintg Bugs
 Report bugs to <a href="https://github.com/hellosaumil/PenDrive/issues"> https://github.com/hellosaumil/PenDrive/issues </a>
-

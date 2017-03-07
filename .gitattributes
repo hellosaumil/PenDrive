@@ -1,2 +1,2 @@
 $ cat .gitattributes
-pendrive linguist-language=Java
+pendrive linguist-language=Shell, Python

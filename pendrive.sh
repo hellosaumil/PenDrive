@@ -112,15 +112,16 @@ else
      printf "\n\e[4;7mPenDrive CLI Utility\e[0m\n"
 
      printf "\e[1;163mNAME\e[0m"
-     printf "\n\tpendrive - A Command-Line Utility to upload/download files like PenDrive on Cloud\n"
+     printf "\n\tpendrive - One-Click Command-Line Utility for file-sharing just for Developers!"
+     printf "\n\tA Command-Line Utility to upload/download files like a PenDrive\n"
 
-     printf "\n\e[1;163mUSAGE\e[0m"
+     printf "\n\e[1;163mSYNOPSIS\e[0m"
      printf "\n\t\e[1;163mpendrive\e[0m"
-     printf " [OPTION]... [FILE]... "
+     printf " [OPTION]... [FILE]... [SERVER]..."
 
      printf "\n\n\e[1;163mDESCRIPTIONS\e[0m"
      printf "\n\tA Simple \e[1;164mCommand-Line Utility\e[0m for file sharing\e[1;3;163m without the hassle\e[0m of finding a pendrive nearby."
-     printf "\n\tYou can transfer files with your Developer Friends with just "
+     printf "\n\tYou can transfer files with your \e[1;3;163mDeveloper\e[0m Friends with just "
      printf "\e[1;163mONE LINE\e[0m"
      printf " !!!"
      printf "\n\tUpload / Download Files at your leisure with PenDrive Cloud."
@@ -132,36 +133,48 @@ else
      printf "\n\tHappy File Sharing!"
 
      printf "\n\n\e[1;163mOPTIONS\e[0m"
-     printf "\n\tDescribes all Options of PenDrive on Cloud\n"
+     printf "\n\t Describes all Options of PenDrive on Cloud\n"
 
      printf "\n\t\t\e[1;163m-l\e[0m"
-     printf "\tOption for Listing available files on PenDrive Cloud"
+     printf "\t Option for Listing available files on PenDrive Cloud"
 
      printf "\n\n\t\t\e[1;163m-u\e[0m"
-     printf "\tUpload a File to PenDrive Cloud by providing a filename after \e[1;163m-u\e[0m option"
+     printf "\t Upload a File to PenDrive Cloud by providing a filename after \e[1;163m-u\e[0m option"
 
      printf "\n\n\t\t\e[1;163m-d\e[0m"
-     printf "\tDownload a File from PenDrive Cloud by providing a filename after \e[1;163m-d\e[0m option"
+     printf "\t Download a File from PenDrive Cloud by providing a filename after \e[1;163m-d\e[0m option"
 
      printf "\n\n\t\t\e[1;163m-h\e[0m"
-     printf "\tProvides help on how to use the pendrive command-line utility"
+     printf "\t Provides help on how to use the pendrive command-line utility"
 
-     printf "\n\n\e[1;163mEXAMPLES\e[0m"
+     printf "\n\n\t\t\e[1;3;163m--server\e[0m"
+     printf " User can provide servername explicitly as \e[1;3;163m--server=\e[0m\e[3m[\"example.server-address.com\"]\e[0m"
+
+     printf "\n\n\e[1;163mUSAGE\e[0m"
+     printf "\n\tpendrive                \t# Displays Man Page of pendrive"
      printf "\n\tpendrive   -l           \t# Lists all files on PenDrive Cloud"
      printf "\n\tpendrive   -u   file.ext\t# Upload a file to PenDrive Cloud"
      printf "\n\tpendrive   -d   file.ext\t# Download a file from PenDrive Cloud"
      printf "\n\tpendrive   -h           \t# Provides Help for using PenDrive Cloud"
 
+     printf "\n\nalternatively,\n"
+     printf "\n\tpendrive   -l              \e[1;3;163m--server=\e[0m\e[3m[\"server.io\"]\e[0m   \t# Lists all files on user-specified PenDrive Cloud Server"
+     printf "\n\tpendrive   -u   file.ext   \e[1;3;163m--server=\e[0m\e[3m[\"server.io\"]\e[0m   \t# Upload a file to user-specified PenDrive Cloud Server"
+     printf "\n\tpendrive   -d   file.ext   \e[1;3;163m--server=\e[0m\e[3m[\"server.io\"]\e[0m   \t# Download a file from user-specified PenDrive Cloud Server"
+
+
      printf "\n\n\e[1;163mVERSION\e[0m"
-     printf "\n\tBeta "
-     printf "\e[3;7m0.1\e[0m"
+     printf "\n\t\e[3;7mBeta\e[0m"
+     printf " 0.1"
 
      printf "\n\n\e[1;163mAUTHOR\e[0m"
      printf "\n\tWritten by Saumil Shah."
+     printf "\n\tMore details about this project can be found at : "
+     printf "\e[3;4mhttps://github.com/hellosaumil/PenDrive\e[0m"
 
      printf "\n\n\e[1;163mREPORTING BUGS\e[0m"
      printf "\n\tReport bugs to "
-     printf "\e[3;4mmailto:hellosaumil@yahoo.com\e[0m"
+     printf "\e[3;4mhttps://github.com/hellosaumil/PenDrive/issues\e[0m"
 
      printf "\n"
 fi

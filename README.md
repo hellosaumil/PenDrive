@@ -31,22 +31,27 @@ Describes all Options of PenDrive on Cloud
 		--server	User can provide servername explicitly as --server=["example.server-address.com"]		
 
 # Usage
+```ruby
 	pendrive                				# Displays Man Page of pendrive
 	pendrive   -l           				# Lists all files on PenDrive Cloud
 	pendrive   -u   file.ext				# Upload a file to PenDrive Cloud
 	pendrive   -d   file.ext				# Download a file from PenDrive Cloud
 	pendrive   -h           				# Provides Help for using PenDrive Cloud
-	
-	pendrive   -l   	   --server="server.io"		# Lists all files on user-specified PenDrive Cloud Server
+```
+alternatively,
+```ruby
+	pendrive   -l              --server="server.io"		# Lists all files on user-specified PenDrive Cloud Server
 	pendrive   -u   file.ext   --server="server.io"		# Upload a file to user-specified PenDrive Cloud Server
 	pendrive   -d   file.ext   --server="server.io"		# Download a file from user-specified PenDrive Cloud Server
-	
+```	
 # Examples
+``` ruby
 	pendrive
 	pendrive -h	
 	pendrive -l or pendrive -l --server="server.io" 
 	pendrive -u file.ext or pendrive -u file.ext --server="server.io" 
 	pendrive -d file.ext or pendrive -d file.ext --server="server.io" 
+```
 
 # Version
 Beta 0.1

@@ -1,13 +1,13 @@
 # PenDrive
-A Command-Line Utility to upload / download files like a PenDrive for Developers
+One-Click Command-Line Utility for file-sharing just for Developers!
 
-NAME
+# NAME
 	pendrive - A Command-Line Utility to upload/download files like PenDrive on Cloud
 
-USAGE
+# USAGE
 	pendrive [OPTION]... [FILE]... 
 
-DESCRIPTIONS
+# DESCRIPTIONS
 	A Simple Command-Line Utility for file sharing without the hassle of finding a pendrive nearby.
 	You can transfer files with your Developer Friends with just ONE LINE !!!
 	Upload / Download Files at your leisure with PenDrive Cloud. Share all kinds of files, be it programs, text files, images & videos.
@@ -15,7 +15,7 @@ DESCRIPTIONS
 	Days of carying flashdrives are gone!
 	Happy File Sharing!
 
-OPTIONS
+# OPTIONS
 	Describes all Options of PenDrive on Cloud
 
 		-l	Option for Listing available files on PenDrive Cloud
@@ -26,19 +26,19 @@ OPTIONS
 
 		-h	Provides help on how to use the pendrive command-line utility
 
-EXAMPLES
+# EXAMPLES
 	pendrive   -l           	# Lists all files on PenDrive Cloud
 	pendrive   -u   file.ext	# Upload a file to PenDrive Cloud
 	pendrive   -d   file.ext	# Download a file from PenDrive Cloud
 	pendrive   -h           	# Provides Help for using PenDrive Cloud
 
-VERSION
+# VERSION
 	Beta 0.1
 
-AUTHOR
+# AUTHOR
 	Written by Saumil Shah.
 
-REPORTING BUGS
+# REPORTING BUGS
 	Report bugs to mailto:hellosaumil@yahoo.com
 
 

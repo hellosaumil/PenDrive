@@ -5,7 +5,7 @@ One-Click Command-Line Utility for file-sharing just for Developers!
 <br>
 
 ```shell
-	sh setup                	# Setup PenDrive with just ONE Hit!
+	bash setup                	# Setup PenDrive with just ONE Hit!
 ```
 # Man Page like Description
 

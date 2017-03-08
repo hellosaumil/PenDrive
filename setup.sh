@@ -11,14 +11,14 @@ case "$OSTYPE" in
   linux*)
 			printf "\nLinux\n"
 
-               z=$(`cat ~/.bashrc | grep "export PATH=\$PATH:~/.PenDrive/"`)
-               if [ "$z" != " " -o "$z" != "" ]
+               z=$(cat ~/.bashrc | grep -p "export PATH=\$PATH:~/.PenDrive/")
+               if [ "$z" == " " -o "$z" == "" ];
                then
                     printf "Aliasing..."
                     printf "\nexport PATH=\$PATH:~/.PenDrive/" >> ~/.bashrc
-     			printf "\nalias pendrive=\"~/.PenDrive/pendrive\"" >> ~/.bashrc
+     			printf "\nalias pendrive=\"~/.PenDrive/pendrive\"" >> ~/.bashrc;
                else
-                    printf "Aliased!"
+                    printf "Aliased!";
                 fi
 
                source ~/.bashrc

@@ -1,12 +1,11 @@
 # PenDrive
 One-Click Command-Line Utility for file-sharing just for Developers!
 <br>
-[Download just ONE file!](setup.sh)
+[Download just ONE file!](setup)
 <br>
 
 ```shell
-	chmod +x setup.sh               # Give Execution Rights
-	./setup.sh                	# Setup PenDrive with just ONE Hit!
+	sh setup                	# Setup PenDrive with just ONE Hit!
 ```
 <h2> Man Page like Description </h2>
 

@@ -21,7 +21,7 @@ case "$OSTYPE" in
                     printf "Aliased!";
                 fi
 
-               source ~/.bashrc
+               . ~/.bashrc
                chmod +x ~/.PenDrive/pendrive
 			printf "\n\nAlias created as \e[1;3;163mpendrive \e[0m"
 			;;
@@ -37,7 +37,7 @@ case "$OSTYPE" in
                     printf "Aliased!";
                 fi
 
-               source ~/.bash_profile
+               . ~/.bash_profile
 			chmod +x ~/.PenDrive/pendrive
 
                printf "\n\nAlias created as \e[1;3;163mpendrive \e[0m"

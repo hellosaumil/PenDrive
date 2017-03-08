@@ -4,7 +4,7 @@ mkdir -p ~/.PenDrive
 
 printf "\nSetting Up PenDrive"
 printf "\n\nDownloading PenDrive...	"
-curl -s https://raw.githubusercontent.com/hellosaumil/PenDrive/master/pendrivex --output pendrive
+curl -s https://raw.githubusercontent.com/hellosaumil/PenDrive/master/pendrive --output ~/.PenDrive/pendrive
 printf "\n\nPenDrive Downloaded!"
 
 flag="-none"

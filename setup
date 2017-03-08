@@ -3,8 +3,11 @@ rm -rf ~/.PenDrive
 mkdir -p ~/.PenDrive
 
 printf "\nSetting Up PenDrive"
-printf "\n\nDownloading PenDrive...	"
-curl -s https://raw.githubusercontent.com/hellosaumil/PenDrive/master/pendrive --output ~/.PenDrive/pendrive
+printf "\n\nDownloading PenDrive..."
+
+full=`echo "~/.PenDrive/pendrive"`
+
+curl -s https://raw.githubusercontent.com/hellosaumil/PenDrive/master/pendrive --output $full
 printf "\n\nPenDrive Downloaded!"
 
 flag="-none"

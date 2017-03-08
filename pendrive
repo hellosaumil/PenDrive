@@ -98,10 +98,11 @@ then
           then
                printf "\nReceiving file : $file\n"
                mkdir -p ~/PenDrive
-               curl -X POST --form "sharingType=download" --form "fileName=$file" "$server" --output "~/PenDrive/$file"
+               full=`echo ~ | echo $x"/$file"`
+               curl -X POST --form "sharingType=download" --form "fileName=$file" "$server" --output $full
 
                printf "\nFile Downloaded...!!!"
-               printf "File can be found at \e[1;3;163m~/PenDrive=\e[0m"
+               printf "\n\nFile can be found at : \e[1;3;163m~/PenDrive\e[0m"
           else
                printf "\n\e[1;31mInvalid File Name Provided...!\e[0m\n"
           fi

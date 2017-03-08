@@ -103,7 +103,7 @@ then
                curl -X POST --form "sharingType=download" --form "fileName=$file" "$server" --output $full
 
                printf "\nFile Downloaded...!!!"
-               printf "\n\nFile can be found at : \e[1;3;163m~/PenDrive\e[0m"
+               printf "\n\nFile can be found at : \e[1;3;163m$full\e[0m"
           else
                printf "\n\e[1;31mInvalid File Name Provided...!\e[0m\n"
           fi

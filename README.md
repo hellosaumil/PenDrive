@@ -5,6 +5,7 @@ One-Click Command-Line Utility for file-sharing just for Developers!
 <br>
 
 ```shell
+	chmod +x setup             # Give Execution Rights
 	./setup                	# Setup PenDrive with just ONE Hit!
 ```
 <h2> Man Page like Description </h2>

@@ -2,7 +2,7 @@
 
 clear
 
-server="https://16f99dc9.ngrok.io"
+server="https://97f8b9d7.ngrok.io"
 
 if [ $# -gt 0 ]
 then

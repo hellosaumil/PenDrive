@@ -1,7 +1,9 @@
 # PenDrive
 One-Click Command-Line Utility for file-sharing just for Developers!
 <br>
-[Download just ONE file!](pendrive)
+[Download just ONE file!](setup.sh)
+<br>
+[Download source code here...](src/pendrive)
 
 <h2> Man Page like Description </h2>
 

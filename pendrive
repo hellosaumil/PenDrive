@@ -57,10 +57,11 @@ then
           fi
 
           printf "\nIn Upload Mode : "
-          file=$2
-          s=`echo "$file" | grep "server"`
+          fileX=$2
+          s=`echo "$fileX" | grep "server"`
           if [ -z "$s" -o "$s" == " " -o "$s" == "" ]
           then
+               file=`basename ${link}`
                printf "\nSending file : $file\n\n"
                curl --form "sharingType=upload" --form "fileName=$file" --form "data=@$file" "$server"
           else
@@ -80,11 +81,12 @@ then
           fi
 
           printf "\nIn Download Mode : "
-          file=$2
+          fileX=$2
 
-          s=`echo "$file" | grep "server"`
+          s=`echo "$fileX" | grep "server"`
           if [ -z "$s" -o "$s" == " " -o "$s" == "" ]
           then
+               file=`basename ${link}`
                printf "\nReceiving file : $file\n"
                curl -X POST --form "sharingType=download" --form "fileName=$file" "$server" --output "./$file"
 

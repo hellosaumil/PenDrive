@@ -2,7 +2,7 @@
 One-Click Command-Line Utility for file-sharing just for Developers!
 <br>
 [Download just ONE file!](setup)
-```shell ./setup	#Setup PenDrive with JUST ONE HIT ```
+``` ./setup	#Setup PenDrive with JUST ONE HIT ```
 <br>
 [Download source code here...](src/pendrive)
 

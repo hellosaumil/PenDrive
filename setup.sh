@@ -11,7 +11,7 @@ case "$OSTYPE" in
   linux*)
 			printf "\nLinux\n"
 
-               z=$(cat ~/.bashrc | grep -p "export PATH=\$PATH:~/.PenDrive/")
+               z=$(cat ~/.bashrc | grep "export PATH=\$PATH:~/.PenDrive/")
                if [ "$z" == " " -o "$z" == "" ];
                then
                     printf "Aliasing..."
@@ -27,7 +27,7 @@ case "$OSTYPE" in
 			;;
   darwin*)
 			printf "\nDarwin\n"
-               z=$(cat ~/.bash_profile | grep -p "export PATH=\$PATH:~/.PenDrive/")
+               z=$(cat ~/.bash_profile | grep "export PATH=\$PATH:~/.PenDrive/")
                if [ "$z" == " " -o "$z" == "" ];
                then
                     printf "Aliasing..."

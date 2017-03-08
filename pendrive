@@ -99,7 +99,7 @@ then
                printf "\nReceiving file : $file\n"
                mkdir -p ~/PenDrive
                x=`echo ~`
-               full=`echo "$x/$file"`
+               full=`echo "$x/PenDrive/$file"`
                curl -X POST --form "sharingType=download" --form "fileName=$file" "$server" --output $full
 
                printf "\nFile Downloaded...!!!"

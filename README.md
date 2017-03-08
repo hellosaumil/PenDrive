@@ -2,10 +2,11 @@
 One-Click Command-Line Utility for file-sharing just for Developers!
 <br>
 [Download just ONE file!](setup)
-``` ./setup	#Setup PenDrive with JUST ONE HIT ```
-<br>
 [Download source code here...](src/pendrive)
 
+```shell
+	./setup                	# Setup PenDrive with just ONE Hit! 
+```
 <h2> Man Page like Description </h2>
 
 # Name

@@ -42,7 +42,7 @@ then
 
           printf "\nIn List Mode :"
           printf "\nAvailable Files : "
-          curl -X GET "$server"
+          curl -X GET "$server/pendrive"
 
           printf "\n"
 
@@ -74,18 +74,16 @@ then
                     printf "$loc\n"
                fi
 
-               if [ -f "$full" ];
+               if [ -e "$fileX" ]
                then
-                    echo "Do";
+                    status=`curl -s -X POST --form "sharingType=upload" --form "fileName=$file" --form "data=@$fileX" "$server/pendrive"`
+                    printf "\n\e[1;96m$status\e[0m"
                else
-                    echo "Don't";
+                    printf "\n\e[1;31mInvalid File Name Requested to upload...!\e[0m"
                fi
 
-          #      status=`curl -s -X POST --form "sharingType=upload" --form "fileName=$file" --form "data=@$fileX" "$server/pendrive"`
-          #      printf "\n\e[1;96m$status\e[0m"
-
           else
-               printf "\n\e[1;31mInvalid File Name Provided...!\e[0m"
+               printf "\n\e[1;31mFile Name NOT Provided...!\e[0m"
           fi
 
      elif [ $1 == "-d" ]
@@ -99,28 +97,39 @@ then
           fi
 
           printf "\nIn Download Mode : "
-          file=$2
+          fileX=$2
 
-          s=`echo "$file" | grep "server"`
+          s=`echo "$fileX" | grep "server"`
           if [ -z "$s" -o "$s" == " " -o "$s" == "" ]
           then
-               printf "\nRequesting file : $file\n"
-               mkdir -p ~/PenDrive
-               x=`echo ~`
-               full=`echo "$x/PenDrive/$file"`
-               curl -s -X POST --form "sharingType=download" --form "fileName=$file" "$server/pendrive" --output $full
 
-               s=`cat "$full" | grep "INFC"`
-               if [ "$s" == " " -o "$s" == "" ]
+               file=`basename ${fileX}`
+               loc=`dirname ${fileX}`
+               z=`echo $loc`
+               
+               if [ "$z" == "." ]
                then
-                    printf "\n\e[1;96mFile Downloaded...!!!\e[0m"
-                    printf "\n\nFile can be found at : \e[1;3;163m$full\e[0m"
+                    printf "\nRequesting file : $file\n"
+                    mkdir -p ~/PenDrive
+                    x=`echo ~`
+                    full=`echo "$x/PenDrive/$file"`
+                    curl -X POST --form "sharingType=download" --form "fileName=$file" "$server/pendrive" --output $full
+
+                    s=`cat "$full" | grep "INFC"`
+                    if [ "$s" == " " -o "$s" == "" ]
+                    then
+                         printf "\n\e[1;96mFile Downloaded...!!!\e[0m"
+                         printf "\n\nFile can be found at : \e[1;3;163m$full\e[0m"
+                    else
+                         printf "\n\e[1;31mInvalid File Name Requested to download...!\e[0m"
+                         rm -rf $full
+                    fi
                else
-                    printf "\n\e[1;31mInvalid File Name Requested...!\e[0m"
-                    rm -rf $full
+                    printf "\n\e[1;31mInvalid File Name Requested to download...!\e[0m"
                fi
+
           else
-               printf "\n\e[1;31mInvalid File Name Provided...!\e[0m"
+               printf "\n\e[1;31mFile Name NOT Provided...!\e[0m"
           fi
 
      elif [ $1 == "-r" ]

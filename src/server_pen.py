@@ -3,14 +3,33 @@ from flask import Flask, request, render_template, send_file, make_response
 
 app = Flask(__name__)
 headers = {'Content-Type' : 'application/json'}
+# cloud_path="./Cloud/"
+cloud_path="/Users/hellosaumil/Desktop/Cloud/"
+
+# @app.route('/ABC', methods=["GET", "POST"])
+@app.errorhandler(403)
+def PenDriveErr(e):
+    return "\nDon't TRY AGAIN oe else you will be BLOCKED!!!\n"
+
+@app.errorhandler(404)
+def PenDriveErr(e):
+    return "\nDon't TRY AGAIN oe else you will be BLOCKED!!!\n"
+
+@app.errorhandler(410)
+def PenDriveErr(e):
+    return "\nDon't TRY AGAIN oe else you will be BLOCKED!!!\n"
+
+@app.errorhandler(500)
+def PenDriveErr(e):
+    return "\nDon't TRY AGAIN oe else you will be BLOCKED!!!\n"
 
 
-@app.route('/', methods=["GET"])
+@app.route('/pendrive', methods=["GET"])
 def PenDriveGET():
-    Files = os.listdir("./Cloud/")
+    Files = os.listdir(cloud_path)
     return json.dumps(Files)
 
-@app.route('/', methods=["POST"])
+@app.route('/pendrive', methods=["POST"])
 def PenDrivePOST():
         print "\n"
 
@@ -29,31 +48,49 @@ def PenDrivePOST():
             print "\n ",sharingType, "\n ",fileName
 
             if sharingType == "download":
-                print '\nFile Downloaded...!'
-                Files = os.listdir("./Cloud/")
+                Files = os.listdir(cloud_path)
 
                 if fileName in Files:
-                    print '\nSending File' + fileName  + '...!'
-                    return send_file('./Cloud/'+fileName)
+                    print '\nSending File ' + fileName  + '...!'
+                    print '\nFile Downloaded...!'
+                    return send_file(cloud_path+fileName)
                 else:
                     print '\nFile Not Found...!'
-                    return json.dumps('\nFile Not Found...!')
+                    return json.dumps('INFC!!!')
+                    # return send_file('')
 
             elif sharingType == "upload":
                 data = dataX[2].split("name=\"")[2].split('\r\n\r\n')[1].split('\r\n\r\n')[0]
                 print "\n ",data
 
                 print "\nFile Name : ",fileName
-                f = open('./Cloud/'+fileName, "w+")
+                f = open(cloud_path+fileName, "w+")
                 f.write(data)
                 f.close()
                 print "\nFile Written as ",fileName
-                return json.dumps('File Uploaded...!')
+                return 'File Uploaded...!!!'
 
+            elif sharingType == "remove":
+                Files = os.listdir(cloud_path)
+
+                print Files
+                print fileName, type(fileName)
+                print fileName in Files
+
+                if fileName in Files:
+                    print '\nRemoving ' + fileName  + '...!'
+                    os.remove(cloud_path+fileName)
+                    print '\nFile Removed...!'
+                    return json.dumps('File Removed...!')
+                else:
+                    print '\nFile Not Found...!'
+                    return json.dumps('INFC!!!')
+                    # return send_file('')
             else:
                 return json.dumps("Couldn't Process your Request !!!")
-        except Exception in e:
-            return json.dumps("Don't try to mess with me!!!")
+
+        except:
+            return json.dumps("Don't try to mess with me!!!\n")
 
 if __name__ == '__main__':
-    app.run(port=8080,threaded=True,debug=True)
+    app.run(host='0.0.0.0',port=8080,threaded=True,debug=True)

@@ -9,7 +9,6 @@ then
   flag="$arr"
   server_flag="found"
   fname_len="${#1}"
-  args="${arr:fname_len:x}"
   # printf "\n\e[1;96mArguments are Enabled...\e[0m"
   # printf "Your Arguments : $args"
 
@@ -33,18 +32,19 @@ if [ "$flag" != "-none" ]
 then
      if [ $1 == "-l" ]
      then
+          if [ $# -gt 1 -a "$server_flag" == "-none" ]
+          then
+               printf "\n\e[1;31mUnncessary Arguments after -l\e[0m"
+               printf "\n\e[1;96mUsage: pendrive [OPTION] [FILE]\e[0m"
+               printf "\n\e[1;96mUsage: pendrive -l\n\e[0m"
+               exit 101
+          fi
+
           printf "\nIn List Mode :"
           printf "\nAvailable Files : "
           curl -X GET "$server"
 
           printf "\n"
-          if [ $# -gt 1 -a "$server_flag" == "-none" ]
-          then
-               printf "\n\e[1;31mUnncessary Arguments after -l\e[0m\n"
-               printf "\n\e[1;96mUsage: pendrive [OPTION] [FILE]\e[0m"
-               printf "\n\e[1;96mUsage: pendrive -l\n\e[0m"
-               exit 101
-          fi
 
      elif [ $1 == "-u" ]
      then
@@ -69,16 +69,24 @@ then
                if [ "$loc" == "." -o "$loc" == ".." ]
                then
                     loc=`pwd $(dirname ${fileX})`
-                    printf "$loc\n\n"
+                    printf "$loc\n"
                else
-                    printf "$loc\n\n"
+                    printf "$loc\n"
                fi
-               curl --form "sharingType=upload" --form "fileName=$file" --form "data=@$fileX" "$server"
-          else
-               printf "\n\e[1;31mInvalid File Name Provided...!\e[0m\n"
-          fi
 
-          printf "\n"
+               if [ -f "$full" ];
+               then
+                    echo "Do";
+               else
+                    echo "Don't";
+               fi
+
+          #      status=`curl -s -X POST --form "sharingType=upload" --form "fileName=$file" --form "data=@$fileX" "$server/pendrive"`
+          #      printf "\n\e[1;96m$status\e[0m"
+
+          else
+               printf "\n\e[1;31mInvalid File Name Provided...!\e[0m"
+          fi
 
      elif [ $1 == "-d" ]
      then
@@ -96,19 +104,58 @@ then
           s=`echo "$file" | grep "server"`
           if [ -z "$s" -o "$s" == " " -o "$s" == "" ]
           then
-               printf "\nReceiving file : $file\n"
+               printf "\nRequesting file : $file\n"
                mkdir -p ~/PenDrive
                x=`echo ~`
                full=`echo "$x/PenDrive/$file"`
-               curl -X POST --form "sharingType=download" --form "fileName=$file" "$server" --output $full
+               curl -s -X POST --form "sharingType=download" --form "fileName=$file" "$server/pendrive" --output $full
 
-               printf "\nFile Downloaded...!!!"
-               printf "\n\nFile can be found at : \e[1;3;163m$full\e[0m"
+               s=`cat "$full" | grep "INFC"`
+               if [ "$s" == " " -o "$s" == "" ]
+               then
+                    printf "\n\e[1;96mFile Downloaded...!!!\e[0m"
+                    printf "\n\nFile can be found at : \e[1;3;163m$full\e[0m"
+               else
+                    printf "\n\e[1;31mInvalid File Name Requested...!\e[0m"
+                    rm -rf $full
+               fi
           else
-               printf "\n\e[1;31mInvalid File Name Provided...!\e[0m\n"
+               printf "\n\e[1;31mInvalid File Name Provided...!\e[0m"
           fi
 
-          printf "\n"
+     elif [ $1 == "-r" ]
+     then
+          if [ $# -lt 2 -o $# -gt 2 -a "$server_flag" == "-none" ]
+          then
+               printf "\n\e[1;31mInsufficient Arguments for -r\e[0m"
+               printf "\n\e[1;96mUsage: pendrive [OPTION] [FILE]\e[0m"
+               printf "\n\e[1;96mUsage: pendrive -r filename\n\e[0m"
+               exit 103
+          fi
+
+          printf "\nIn Remove Mode : "
+          printf "\t\e[1;31mBE CAUTIOUS\e[0m"
+          file=$2
+
+          s=`echo "$file" | grep "server"`
+          if [ -z "$s" -o "$s" == " " -o "$s" == "" ]
+          then
+               printf "\nRequesting to remove file : $file\n"
+               mkdir -p ~/PenDrive
+               x=`echo ~`
+               full=`echo "$x/PenDrive/$file"`
+
+               status=`curl -sX POST --form "sharingType=remove" --form "fileName=$file" "$server/pendrive"`
+               s=`echo "$status" | grep "INFC"`
+               if [ "$s" == " " -o "$s" == "" ]
+               then
+                    printf "\n\e[1;96mFile Removed...!!!\e[0m"
+               else
+                    printf "\n\e[1;31mInvalid File Name Requested to remove...!\e[0m"
+               fi
+          else
+               printf "\n\e[1;31mInvalid File Name Provided...!\e[0m"
+          fi
 
      elif [ $1 == "-h" ]
      then
@@ -120,7 +167,6 @@ then
           printf "\n"
      else
           printf "\nUnexpected Mode...!!!"
-
      fi
 
 else

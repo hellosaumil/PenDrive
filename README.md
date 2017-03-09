@@ -60,7 +60,7 @@ alternatively,
 ```
 
 <h2 style="color:tomato"> Version </h2>
-Beta 0.1
+Beta 0.1 - Only Supports Unix Systems (i.e, macOS, OS X, Linux - Ubuntu)
 
 <h2 style="color:tomato"> Author </h2>
 Written by Saumil Shah. <a href="https://hellosaumil.github.io"> https://hellosaumil.github.io </a>

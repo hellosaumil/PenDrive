@@ -6,7 +6,7 @@ printf "\nSetting Up PenDrive"
 printf "\n\nDownloading PenDrive..."
 x=`echo ~`
 full=`echo "$x/.PenDrive/pendrive"`
-curl -s https://raw.githubusercontent.com/hellosaumil/PenDrive/master/pendrive --output $full
+curl -s https://raw.githubusercontent.com/hellosaumil/PenDrive/master/src/endrive --output $full
 printf "\n\nPenDrive Downloaded!"
 
 flag="-none"

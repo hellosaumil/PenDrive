@@ -105,7 +105,6 @@ then
 
                file=`basename ${fileX}`
                loc=`dirname ${fileX}`
-               z=`echo $loc`
                
                if [ "$z" == "." ]
                then

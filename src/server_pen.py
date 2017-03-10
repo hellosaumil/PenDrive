@@ -3,10 +3,9 @@ from flask import Flask, request, render_template, send_file, make_response
 
 app = Flask(__name__)
 headers = {'Content-Type' : 'application/json'}
-# cloud_path="./Cloud/"
-cloud_path="/Users/hellosaumil/Desktop/Cloud/"
+cloud_path="./Cloud/"
+# cloud_path="/Users/hellosaumil/Desktop/Cloud/"
 
-# @app.route('/ABC', methods=["GET", "POST"])
 @app.errorhandler(403)
 def PenDriveErr(e):
     return "\nDon't TRY AGAIN oe else you will be BLOCKED!!!\n"

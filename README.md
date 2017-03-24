@@ -19,8 +19,11 @@ pendrive - A Command-Line Utility to upload/download files like PenDrive on Clou
 A Simple Command-Line Utility for file sharing without the hassle of finding a pendrive nearby.
 	You can transfer files with your Developer Friends with just ONE LINE !!!
 	Upload / Download Files at your leisure with PenDrive Cloud. Share all kinds of files, be it programs, text files, images & videos. You can also Copy & Paste Text without the hassle to mail!
+	<br>
 	Just need an Internet Connection and you're Good to Go!
+	<br>
 	Days of carrying flashdrives are gone!
+	<br>
 	Happy File Sharing!
 
 <h2 style="color:tomato"> Options </h2>

@@ -38,7 +38,7 @@ Describes all Options of PenDrive on Cloud
 
 		-h		  Provides help on how to use the pendrive command-line utility
 
-		--server	User can provide servername explicitly as --server=["example.server-address.com"]		
+		--server	  User can provide servername explicitly as --server=["example.server-address.com"]		
 
 <h2 style="color:tomato"> Usage </h2>
 ```shell
@@ -47,7 +47,7 @@ Describes all Options of PenDrive on Cloud
 	pendrive   -u   file.ext				# Upload a file to PenDrive Cloud
 	pendrive   -d   file.ext				# Download a file from PenDrive Cloud
 	pendrive   -c   copyText				# Copy Text to PenDrive Cloud; User will be asked to provide a Token
-	pendrive   -p   pasteToken			        # Paste Text to PenDrive Cloud
+	pendrive   -p   pasteToken			          # Paste Text to PenDrive Cloud
 	pendrive   -h           				# Provides Help for using PenDrive Cloud
 ```
 alternatively,

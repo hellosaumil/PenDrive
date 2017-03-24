@@ -105,26 +105,22 @@ then
 
                file=`basename ${fileX}`
                loc=`dirname ${fileX}`
-               
-               if [ "$z" == "." ]
-               then
-                    printf "\nRequesting file : $file\n"
-                    mkdir -p ~/PenDrive
-                    x=`echo ~`
-                    full=`echo "$x/PenDrive/$file"`
-                    curl -X POST --form "sharingType=download" --form "fileName=$file" "$server/pendrive" --output $full
 
-                    s=`cat "$full" | grep "INFC"`
-                    if [ "$s" == " " -o "$s" == "" ]
-                    then
-                         printf "\n\e[1;96mFile Downloaded...!!!\e[0m"
-                         printf "\n\nFile can be found at : \e[1;3;163m$full\e[0m"
-                    else
-                         printf "\n\e[1;31mInvalid File Name Requested to download...!\e[0m"
-                         rm -rf $full
-                    fi
+               printf "\nRequesting file : $file\n"
+               mkdir -p ~/PenDrive
+               x=`echo ~`
+               full=`echo "$x/PenDrive/$file"`
+               curl -X POST --form "sharingType=download" --form "fileName=$file" "$server/pendrive" --output $full
+
+               s=`cat "$full" | grep "INFC"`
+               if [ "$s" == " " -o "$s" == "" ]
+               then
+                    printf "\n\e[1;96mFile Downloaded...!!!\e[0m"
+                    printf "\n\nFile can be found at : \e[1;3;163m$full\e[0m"
                else
                     printf "\n\e[1;31mInvalid File Name Requested to download...!\e[0m"
+                    printf "\n\n\e[1;96mTry Writing: pendrive -l to see available files\e[0m"
+                    rm -rf $full
                fi
 
           else

@@ -303,7 +303,7 @@ else
      printf "\n\tYou can also \e[1;3;163mCopy & Paste Text\e[0m without the hassle to mail!"
 
      printf "\n\n\tJust need an Internet Connection and you're Good to Go!"
-     printf "\n\tDays of carying flashdrives are gone!"
+     printf "\n\tDays of carrying flashdrives are gone!"
 
      printf "\n\tHappy File Sharing!"
 

@@ -2,7 +2,10 @@
 
 clear
 
-server="http://0f84cd14.ngrok.io"
+# server="http://0f84cd14.ngrok.io"
+# server="http://localhost:8080"
+# server="0.0.0.0:8080"
+server="127.0.0.1:8080"
 
 if [ $# -gt 0 ]
 then
@@ -16,17 +19,34 @@ then
      if [ ! -z "$z" -a "$z" != " " -a "$z" != "" ]
      then
           server=`echo $@ | cut -d " "  -f $# | cut -d "=" -f 2`
-          printf "\n\nProvided Server : "$server
+
+          s=`echo "$server" | grep "server"`
+          if [ -z "$s" -o "$s" == " " -o "$s" == "" ]
+          then
+               printf "\nServer Name Provided!\n"
+               printf "\n\n\e[1;96mProvided Server : $server\n\e[0m"
+          else
+               printf "\n\e[1;31mInvalid Server Name Provided!\n\e[0m"
+               printf "\n\e[1;96mUsage: pendrive [OPTION] [KEYWORD] --server=\"server.io:port\"\e[0m"
+               printf "\n\e[1;96mPossible KEYWORDs: FILE, TEXT, TOKEN \n\e[0m"
+
+               printf "\n\nAlternatively, write"
+               printf "\e[1;163m pendrive\e[0m"
+               printf " in shell for HELP\n"
+
+               exit 233
+          fi
+
+
      else
           server_flag="-none"
+          # printf "\n\n\e[1;96mDefault Server : $server\n\e[0m"
       fi
 
 else
  	flag="-none"
      # printf "\n\e[1;31mNo Arguments provided... :(\e[0m\n"
 fi
-
-printf "\n"
 
 if [ "$flag" != "-none" ]
 then
@@ -42,7 +62,7 @@ then
 
           printf "\nIn List Mode :"
           printf "\nAvailable Files : "
-          curl -X GET "$server/pendrive"
+          printf "\e[3;96m `curl -sX GET "$server/pendrive"` \n\e[0m"
 
           printf "\n"
 
@@ -64,8 +84,9 @@ then
                file=`basename ${fileX}`
                loc=`dirname ${fileX}`
 
-               printf "\nSending file : $file"
-               printf "\nLocated at : "
+               printf "\nSending file : "
+               printf "\e[3;96m$file\n\e[0m"
+               printf "Locating at... "
                if [ "$loc" == "." -o "$loc" == ".." ]
                then
                     loc=`pwd $(dirname ${fileX})`
@@ -84,6 +105,89 @@ then
 
           else
                printf "\n\e[1;31mFile Name NOT Provided...!\e[0m"
+          fi
+
+     elif [ $1 == "-c" ]
+     then
+          if [ $# -lt 2 -a "$server_flag" == "-none" ]
+          then
+               printf "\n\e[1;31mInsufficient Arguments for -c\e[0m"
+               printf "\n\e[1;96mUsage: pendrive [OPTION] [TEXT]\e[0m"
+               printf "\n\e[1;96mUsage: pendrive -c copyText\n\e[0m"
+               exit 102
+          fi
+
+          printf "\nIn Copy Mode : "
+          copyX="${@:2:$(($#))}"
+
+          s=`echo "$copyX" | grep "server"`
+          if [ -z "$s" -o "$s" == " " -o "$s" == "" ]
+          then
+               copyX=""${@:2:$(($#-1))}""
+          else
+               # printf "\n\e[1;31mServer Provided...!\e[0m"
+               copyX="${@:2:$(($#-2))}"
+          fi
+
+               printf "\n\nSending text... "
+               printf "\e[3;96m$copyX\e[0m"
+
+               printf "\tProvide Token : "
+               read tokenX
+
+               status=`curl -sX POST --form "sharingType=copy" --form "fileName=$tokenX.txt" --form "data=${copyX}" "$server/pendrive"`
+               # printf "\n\e[1;96m$status\e[0m"
+
+               s=`echo "$status" | grep "INFC"`
+               if [ "$s" == " " -o "$s" == "" ]
+               then
+                    printf "\nUse Token "
+                    printf "\e[1;96m$tokenX\e[0m"
+                    printf " to Paste Content!\n\e[0m"
+
+                    printf "\n\e[3mUsage: pendrive -p \e[0m"
+                    printf "\e[3;96m$tokenX\e[0m"
+               else
+                    printf "\n\e[1;31mCould not Share Data!\n\e[0m"
+               fi
+
+     elif [ $1 == "-p" ]
+     then
+          if [ $# -lt 2 -o $# -gt 2 -a "$server_flag" == "-none" ]
+          then
+               printf "\n\e[1;31mInsufficient Arguments for -p\e[0m"
+               printf "\n\e[1;96mUsage: pendrive [OPTION] [TOKEN]\e[0m"
+               printf "\n\e[1;96mUsage: pendrive -p pasteToken\n\e[0m"
+               exit 103
+          fi
+
+          printf "\nIn Paste Mode : "
+          pasteX=$2
+
+          s=`echo "$pasteX" | grep "server"`
+          if [ -z "$s" -o "$s" == " " -o "$s" == "" ]
+          then
+
+               printf "\nRequesting text : "
+               printf "\e[3;96m$pasteX\n\e[0m"
+
+               status=`curl -sX POST --form "sharingType=paste" --form "fileName=$pasteX.txt" "$server/pendrive"`
+               # printf "\n\e[1;96m$status\e[0m"
+
+               s=`echo "$status" | grep "INFC"`
+               if [ "$s" == " " -o "$s" == "" ]
+               then
+                    printf "\nYour Shared Text is... "
+                    printf "\e[1;96m$status\e[0m"
+
+                    printf "\n\n\e[3mUsage: pendrive -c \e[0m"
+                    printf "\e[3;96mwhateverText\e[0m"
+               else
+                    printf "\n\e[1;31mInvalid Paste Token Requested to copy...!\e[0m"
+               fi
+
+          else
+               printf "\n\e[1;31mPaste Token NOT Provided...!\e[0m"
           fi
 
      elif [ $1 == "-d" ]
@@ -106,7 +210,8 @@ then
                file=`basename ${fileX}`
                loc=`dirname ${fileX}`
 
-               printf "\nRequesting file : $file\n"
+               printf "\nRequesting file : "
+               printf "\e[3;96m$file\n\e[0m"
                mkdir -p ~/PenDrive
                x=`echo ~`
                full=`echo "$x/PenDrive/$file"`
@@ -144,7 +249,9 @@ then
           s=`echo "$file" | grep "server"`
           if [ -z "$s" -o "$s" == " " -o "$s" == "" ]
           then
-               printf "\nRequesting to remove file : $file\n"
+               printf "\nRequesting to remove file : "
+               printf "\e[3;96m$file\n\e[0m"
+
                mkdir -p ~/PenDrive
                x=`echo ~`
                full=`echo "$x/PenDrive/$file"`
@@ -163,14 +270,15 @@ then
 
      elif [ $1 == "-h" ]
      then
-          printf "\n\n\e[1;96mUsage: pendrive [OPTION] [FILE]\e[0m"
+          printf "\n\n\e[1;96mUsage: pendrive [OPTION] [KEYWORD]\e[0m"
+          printf "\n\e[1;96mPossible KEYWORDs: FILE, TEXT, TOKEN \n\e[0m"
           printf "\nAlternatively, write"
           printf "\e[1;163m pendrive\e[0m"
           printf " in shell"
 
           printf "\n"
      else
-          printf "\nUnexpected Mode...!!!"
+          printf "\n\e[1;31mUnexpected Mode...!!!\e[0m"
      fi
 
 else
@@ -178,21 +286,23 @@ else
 
      printf "\e[1;163mNAME\e[0m"
      printf "\n\tpendrive - One-Click Command-Line Utility for file-sharing just for Developers!"
-     printf "\n\tA Command-Line Utility to upload/download files like a PenDrive\n"
+     printf "\n\tA Command-Line Utility to upload/download files like a PenDrive"
+     printf "\twith added functionality of Copy & Paste.\n"
 
      printf "\n\e[1;163mSYNOPSIS\e[0m"
      printf "\n\t\e[1;163mpendrive\e[0m"
-     printf " [OPTION]... [FILE]... [SERVER]..."
+     printf " [OPTION]... [FILE]... [TEXT]... [TOKEN]... [SERVER]..."
 
      printf "\n\n\e[1;163mDESCRIPTIONS\e[0m"
      printf "\n\tA Simple \e[1;164mCommand-Line Utility\e[0m for file sharing\e[1;3;163m without the hassle\e[0m of finding a pendrive nearby."
      printf "\n\tYou can transfer files with your \e[1;3;163mDeveloper\e[0m Friends with just "
      printf "\e[1;163mONE LINE\e[0m"
      printf " !!!"
-     printf "\n\tUpload / Download Files at your leisure with PenDrive Cloud."
-     printf " Share all kinds of files, be it \e[1;3;163mprograms, text files, images & videos.\e[0m"
+     printf "\n\n\tUpload / Download Files at your leisure with PenDrive Cloud."
+     printf "\n\tShare all kinds of files, be it \e[1;3;163mprograms, text files, images & videos.\e[0m"
+     printf "\n\tYou can also \e[1;3;163mCopy & Paste Text\e[0m without the hassle to mail!"
 
-     printf "\n\tJust need an Internet Connection and you're Good to Go!"
+     printf "\n\n\tJust need an Internet Connection and you're Good to Go!"
      printf "\n\tDays of carying flashdrives are gone!"
 
      printf "\n\tHappy File Sharing!"
@@ -209,6 +319,13 @@ else
      printf "\n\n\t\t\e[1;163m-d\e[0m"
      printf "\t Download a File from PenDrive Cloud by providing a filename after \e[1;163m-d\e[0m option"
 
+     printf "\n\n\t\t\e[1;163m-c\e[0m"
+     printf "\t Copy Text to PenDrive Cloud by providing text after \e[1;163m-c\e[0m option; "
+     printf "User will be asked to provide a Token"
+
+     printf "\n\n\t\t\e[1;163m-p\e[0m"
+     printf "\t Paste Text from PenDrive Cloud by providing Paste Token after \e[1;163m-p\e[0m option"
+
      printf "\n\n\t\t\e[1;163m-h\e[0m"
      printf "\t Provides help on how to use the pendrive command-line utility"
 
@@ -220,13 +337,16 @@ else
      printf "\n\tpendrive   -l           \t# Lists all files on PenDrive Cloud"
      printf "\n\tpendrive   -u   file.ext\t# Upload a file to PenDrive Cloud"
      printf "\n\tpendrive   -d   file.ext\t# Download a file from PenDrive Cloud"
+     printf "\n\tpendrive   -c   copyText\t# Copy Text to PenDrive Cloud with a user-specified Token"
+     printf "\n\tpendrive   -p   pasteToken\t# Paste Text from PenDrive Cloud using a user-specified Token"
      printf "\n\tpendrive   -h           \t# Provides Help for using PenDrive Cloud"
 
      printf "\n\nalternatively,\n"
-     printf "\n\tpendrive   -l              \e[1;3;163m--server=\e[0m\e[3m[\"server.io\"]\e[0m   \t# Lists all files on user-specified PenDrive Cloud Server"
-     printf "\n\tpendrive   -u   file.ext   \e[1;3;163m--server=\e[0m\e[3m[\"server.io\"]\e[0m   \t# Upload a file to user-specified PenDrive Cloud Server"
-     printf "\n\tpendrive   -d   file.ext   \e[1;3;163m--server=\e[0m\e[3m[\"server.io\"]\e[0m   \t# Download a file from user-specified PenDrive Cloud Server"
-
+     printf "\n\tpendrive   -l               \e[1;3;163m--server=\e[0m\e[3m[\"server.io\"]\e[0m   \t# Lists all files on user-specified PenDrive Cloud Server"
+     printf "\n\tpendrive   -u   file.ext    \e[1;3;163m--server=\e[0m\e[3m[\"server.io\"]\e[0m   \t# Upload a file to user-specified PenDrive Cloud Server"
+     printf "\n\tpendrive   -d   file.ext    \e[1;3;163m--server=\e[0m\e[3m[\"server.io\"]\e[0m   \t# Download a file from user-specified PenDrive Cloud Server"
+     printf "\n\tpendrive   -c   copyText    \e[1;3;163m--server=\e[0m\e[3m[\"server.io\"]\e[0m   \t# Copy Text to user-specified PenDrive Cloud Server"
+     printf "\n\tpendrive   -p   pasteToken  \e[1;3;163m--server=\e[0m\e[3m[\"server.io\"]\e[0m   \t# Paste Text from user-specified PenDrive Cloud Server"
 
      printf "\n\n\e[1;163mVERSION\e[0m"
      printf "\n\t\e[3;7mBeta\e[0m"

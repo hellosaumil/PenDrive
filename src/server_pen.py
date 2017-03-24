@@ -33,6 +33,7 @@ def PenDrivePOST():
         print "\n"
 
         try:
+            os.system('clear')
             data = request.stream.read()
             print data
 
@@ -41,7 +42,6 @@ def PenDrivePOST():
 
             sharingType = dataX[0].split("name=\"")[1].split("\"")[1].split('\r\n\r\n')[1]
             fileName = dataX[1].split("name=\"")[1].split("\"")[1].split('\r\n\r\n')[1]
-
 
             print '\n**********'
             print "\n ",sharingType, "\n ",fileName
@@ -59,6 +59,15 @@ def PenDrivePOST():
                     # return send_file('')
 
             elif sharingType == "upload":
+
+                print "\n DD1 : ",dataX[2]
+                print "\n DD2 : ",dataX[2].split("name=\"")
+                print "\n DD3 : ",dataX[2].split("name=\"")[2]
+                print "\n DD3 : ",dataX[2].split("name=\"")[2].split('\r\n\r\n')
+                print "\n DD4 : ",dataX[2].split("name=\"")[2].split('\r\n\r\n')[1]
+                print "\n DD5 : ",dataX[2].split("name=\"")[2].split('\r\n\r\n')[1].split('\r\n\r\n')
+                print "\n DD6 : ",dataX[2].split("name=\"")[2].split('\r\n\r\n')[1].split('\r\n\r\n')[0]
+
                 data = dataX[2].split("name=\"")[2].split('\r\n\r\n')[1].split('\r\n\r\n')[0]
                 print "\n ",data
 
@@ -85,6 +94,33 @@ def PenDrivePOST():
                     print '\nFile Not Found...!'
                     return json.dumps('INFC!!!')
                     # return send_file('')
+
+            elif sharingType == "copy":
+
+                data = dataX[2].split("name=\"")[1].split('\r\n\r\n')[1]
+                print "\n D :",data
+
+                print "\nFile Name : ",fileName
+                f = open(cloud_path+'TextSharing/'+fileName, "w+")
+                f.write(data)
+                f.close()
+
+                print "\nSharing Text Written as ",fileName
+                return 'Sharing Text is Live...!!!'
+
+            elif sharingType == "paste":
+                Files = os.listdir(cloud_path+'TextSharing/')
+                print Files
+
+                if fileName in Files:
+                    print '\nSending File ' + fileName  + '...!'
+                    print '\nSharing Text Found...!'
+                    return send_file(cloud_path+'TextSharing/'+fileName)
+                else:
+                    print '\nPasteToken Not Found...!'
+                    return json.dumps('INFC!!!')
+                    # return send_file('')
+
             else:
                 return json.dumps("Couldn't Process your Request !!!")
 
@@ -93,3 +129,4 @@ def PenDrivePOST():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=8080,threaded=True,debug=True)
+    # app.run(port=8080,threaded=True,debug=True)

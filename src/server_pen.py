@@ -3,29 +3,38 @@ from flask import Flask, request, render_template, send_file, make_response
 
 app = Flask(__name__)
 headers = {'Content-Type' : 'application/json'}
-cloud_path="./Cloud/"
-# cloud_path="/Users/hellosaumil/Desktop/Cloud/"
+# cloud_path="./Cloud/"
+cloud_path="/Users/hellosaumil/Desktop/Cloud/"
 
 @app.errorhandler(403)
 def PenDriveErr(e):
-    return "\nDon't TRY AGAIN oe else you will be BLOCKED!!!\n"
+    return "\nDon't TRY AGAIN or else you will be BLOCKED!!!\n"
 
 @app.errorhandler(404)
 def PenDriveErr(e):
-    return "\nDon't TRY AGAIN oe else you will be BLOCKED!!!\n"
+    return "\nDon't TRY AGAIN or else you will be BLOCKED!!!\n"
 
 @app.errorhandler(410)
 def PenDriveErr(e):
-    return "\nDon't TRY AGAIN oe else you will be BLOCKED!!!\n"
+    return "\nDon't TRY AGAIN or else you will be BLOCKED!!!\n"
 
 @app.errorhandler(500)
 def PenDriveErr(e):
-    return "\nDon't TRY AGAIN oe else you will be BLOCKED!!!\n"
+    return "\nDon't TRY AGAIN or else you will be BLOCKED!!!\n"
 
+@app.route('/life', methods=["GET"])
+def LiveGET():
+    return 'I\'m Alive!'
 
 @app.route('/pendrive', methods=["GET"])
 def PenDriveGET():
     Files = os.listdir(cloud_path)
+
+    try:
+        Files.remove('TextSharing')
+    except ValueError:
+        pass
+
     return json.dumps(Files)
 
 @app.route('/pendrive', methods=["POST"])
@@ -59,15 +68,6 @@ def PenDrivePOST():
                     # return send_file('')
 
             elif sharingType == "upload":
-
-                print "\n DD1 : ",dataX[2]
-                print "\n DD2 : ",dataX[2].split("name=\"")
-                print "\n DD3 : ",dataX[2].split("name=\"")[2]
-                print "\n DD3 : ",dataX[2].split("name=\"")[2].split('\r\n\r\n')
-                print "\n DD4 : ",dataX[2].split("name=\"")[2].split('\r\n\r\n')[1]
-                print "\n DD5 : ",dataX[2].split("name=\"")[2].split('\r\n\r\n')[1].split('\r\n\r\n')
-                print "\n DD6 : ",dataX[2].split("name=\"")[2].split('\r\n\r\n')[1].split('\r\n\r\n')[0]
-
                 data = dataX[2].split("name=\"")[2].split('\r\n\r\n')[1].split('\r\n\r\n')[0]
                 print "\n ",data
 
@@ -90,6 +90,23 @@ def PenDrivePOST():
                     os.remove(cloud_path+fileName)
                     print '\nFile Removed...!'
                     return json.dumps('File Removed...!')
+                else:
+                    print '\nFile Not Found...!'
+                    return json.dumps('INFC!!!')
+                    # return send_file('')
+
+            elif sharingType == "removePaste":
+                Files = os.listdir(cloud_path+'TextSharing/')
+
+                print Files
+                print fileName, type(fileName)
+                print fileName in Files
+
+                if fileName in Files:
+                    print '\nRemoving ' + fileName  + '...!'
+                    os.remove(cloud_path+'TextSharing/'+fileName)
+                    print '\nPaste Token File Removed...!'
+                    return json.dumps('Paste Token Removed...')
                 else:
                     print '\nFile Not Found...!'
                     return json.dumps('INFC!!!')
@@ -129,4 +146,3 @@ def PenDrivePOST():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=8080,threaded=True,debug=True)
-    # app.run(port=8080,threaded=True,debug=True)

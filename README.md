@@ -31,13 +31,21 @@ Describes all Options of PenDrive on Cloud
 
 		-l		  Option for Listing available files on PenDrive Cloud
 
+
 		-u		  Upload a File to PenDrive Cloud by providing a filename after -u option
 
 		-d		  Download a File from PenDrive Cloud by providing a filename after -d option
 
+
 		-c		  Copy Text to PenDrive Cloud by providing text after -c option; User will be asked to provide a Token
 
 		-p		  Paste Text from PenDrive Cloud by providing Paste Token after -p option
+
+
+		-r		  Remove a file on PenDrive Cloud
+
+		-rp		 Remove Shared Text from PenDrive Cloud by providing Paste Token after -rp option
+
 
 		-h		  Provides help on how to use the pendrive command-line utility
 
@@ -46,20 +54,33 @@ Describes all Options of PenDrive on Cloud
 <h2 style="color:tomato"> Usage </h2>
 ```shell
 	pendrive                				# Displays Man Page of pendrive
+
 	pendrive   -l           				# Lists all files on PenDrive Cloud
+
 	pendrive   -u   file.ext				# Upload a file to PenDrive Cloud
 	pendrive   -d   file.ext				# Download a file from PenDrive Cloud
+
 	pendrive   -c   copyText				# Copy Text to PenDrive Cloud; User will be asked to provide a Token
 	pendrive   -p   pasteToken			        # Paste Text to PenDrive Cloud
+
+	pendrive   -r   file.ext				# Remove a file on PenDrive Cloud
+	pendrive   -rp  pasteToken			  # Remove Shared Text from PenDrive Cloud using a user-specified Token
+
 	pendrive   -h           				# Provides Help for using PenDrive Cloud
 ```
 alternatively,
 ```shell
 	pendrive   -l                --server="server.io"		# Lists all files on user-specified PenDrive Cloud Server
+
 	pendrive   -u   file.ext     --server="server.io"		# Upload a file to user-specified PenDrive Cloud Server
 	pendrive   -d   file.ext     --server="server.io"		# Download a file from user-specified PenDrive Cloud Server
+
 	pendrive   -c   copyText     --server="server.io"		# Upload a file to user-specified PenDrive Cloud Server
 	pendrive   -p   pasteToken   --server="server.io"		# Download a file from user-specified PenDrive Cloud Server
+
+	pendrive   -r   file.ext     --server="server.io"		# Remove a file on PenDrive Cloud
+	pendrive   -rp  pasteToken   --server="server.io"		# Shared Text from PenDrive Cloud using a user-specified Token
+	
 ```
 <h2 style="color:tomato"> Examples </h2>
 ``` shell

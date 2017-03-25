@@ -44,7 +44,7 @@ Describes all Options of PenDrive on Cloud
 
 		-r		  Remove a file on PenDrive Cloud
 
-		-rp		 Remove Shared Text from PenDrive Cloud by providing Paste Token after -rp option
+		-rp		  Remove Shared Text from PenDrive Cloud by providing Paste Token after -rp option
 
 
 		-h		  Provides help on how to use the pendrive command-line utility
@@ -64,7 +64,7 @@ Describes all Options of PenDrive on Cloud
 	pendrive   -p   pasteToken			        # Paste Text to PenDrive Cloud
 
 	pendrive   -r   file.ext				# Remove a file on PenDrive Cloud
-	pendrive   -rp  pasteToken			  # Remove Shared Text from PenDrive Cloud using a user-specified Token
+	pendrive   -rp  pasteToken			        # Remove Shared Text from PenDrive Cloud using a user-specified Token
 
 	pendrive   -h           				# Provides Help for using PenDrive Cloud
 ```
@@ -80,7 +80,7 @@ alternatively,
 
 	pendrive   -r   file.ext     --server="server.io"		# Remove a file on PenDrive Cloud
 	pendrive   -rp  pasteToken   --server="server.io"		# Shared Text from PenDrive Cloud using a user-specified Token
-	
+
 ```
 <h2 style="color:tomato"> Examples </h2>
 ``` shell

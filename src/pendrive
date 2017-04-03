@@ -1,7 +1,7 @@
 #@(#)Code for Web Pendrive. Developed By: Saumil Shah"
 clear
 
-server="http://0f84cd14.ngrok.io"
+server="http://0cc74f13.ngrok.io"
 # server="http://localhost:8080"
 # server="0.0.0.0:8080"
 

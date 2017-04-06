@@ -9,26 +9,11 @@ full=`echo "$x/.PenDrive/pendrive"`
 sudo curl -\# https://raw.githubusercontent.com/hellosaumil/PenDrive/master/src/pendrive --output $full
 printf "\n\nPenDrive Downloaded!"
 
+printf "\nOS : $OSTYPE"
+
 os_flag="-none"
 case "$OSTYPE" in
-  linux*)
-			printf "\nLinux\n"
 
-               z=$(cat ~/.bashrc | grep "export PATH=\$PATH:~/.PenDrive/")
-               if [ "$z" == " " -o "$z" == "" ];
-               then
-                    printf "Aliasing..."
-                    printf "\nexport PATH=\$PATH:~/.PenDrive/" >> ~/.bashrc
-     			printf "\nalias pendrive=\"~/.PenDrive/pendrive\"" >> ~/.bashrc;
-               else
-                    printf "Aliased!";
-                fi
-
-               source ~/.bashrc
-               sudo chmod +x ~/.PenDrive/pendrive
-			printf "\n\nAlias created as \e[1;3;163mpendrive \e[0m"
-               os_flag=True
-			;;
   darwin*)
 			printf "\nDarwin\n"
                z=$(cat ~/.bash_profile | grep "export PATH=\$PATH:~/.PenDrive/")
@@ -47,7 +32,24 @@ case "$OSTYPE" in
                printf "\n\nAlias created as \e[1;3;163mpendrive \e[0m"
                os_flag=True
 			;;
-	*)		printf "\nUnknown OS-Type: $OSTYPE"
+	*)
+          printf "\nLinux\n"
+
+          z=$(cat ~/.bashrc | grep "export PATH=\$PATH:~/.PenDrive/")
+          if [ "$z" == " " -o "$z" == "" ];
+          then
+               printf "Aliasing..."
+               printf "\nexport PATH=\$PATH:~/.PenDrive/" >> ~/.bashrc
+               printf "\nalias pendrive=\"~/.PenDrive/pendrive\"" >> ~/.bashrc;
+          else
+               printf "Aliased!";
+           fi
+
+          source ~/.bashrc
+          sudo chmod +x ~/.PenDrive/pendrive
+          printf "\n\nAlias created as \e[1;3;163mpendrive \e[0m"
+          os_flag=True
+          ;;
 esac
 
 if [ os_flag != "-none" ]

@@ -29,6 +29,8 @@ A Simple Command-Line Utility for file sharing without the hassle of finding a p
 <h2 style="color:tomato"> Options </h2>
 Describes all Options of PenDrive on Cloud
 
+		--upgrade	 Upgrade PenDrive from Cloud
+
 		-l		  Option for Listing available files on PenDrive Cloud
 
 

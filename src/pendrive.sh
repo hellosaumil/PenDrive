@@ -158,7 +158,6 @@ then
 
                printf "\n"
 
-
           elif [ $1 == "-u" ]
           then
                if [ $# -lt 2 -o $# -gt 2 -a "$server_flag" == "-none" ]
@@ -404,7 +403,7 @@ then
           elif [ $1 == "-h" ]
           then
                printf "\n\n\e[1;96mUsage: pendrive [OPTION] [KEYWORD]\e[0m"
-               printf "\n\e[1;96mPossible KEYWORDs: FILE, TEXT, TOKEN \n\e[0m"
+               printf "\n\e[1;96mPossible KEYWORDs: OPTION, FILE, TEXT, TOKEN \n\e[0m"
                printf "\nAlternatively, write"
                printf "\e[1;163m pendrive\e[0m"
                printf " in shell"
@@ -473,6 +472,7 @@ then
 
                printf "\n\n\e[1;163mUSAGE\e[0m"
                printf "\n\tpendrive                \t# Displays Man Page of pendrive"
+               printf "\n\tpendrive   --upgrade     \t# Upgrade PenDrive from Cloud"
                printf "\n\tpendrive   -l           \t# Lists all files on PenDrive Cloud"
                printf "\n"
                printf "\n\tpendrive   -u   file.ext\t# Upload a file to PenDrive Cloud"
@@ -487,6 +487,7 @@ then
                printf "\n\tpendrive   -h           \t# Provides Help for using PenDrive Cloud"
 
                printf "\n\nalternatively,\n"
+               printf "\n\tpendrive   --upgrade        \e[1;3;163m--server=\e[0m\e[3m[\"server.io\"]\e[0m   \t# Upgrade PenDrive from Cloud"
                printf "\n\tpendrive   -l               \e[1;3;163m--server=\e[0m\e[3m[\"server.io\"]\e[0m   \t# Lists all files on user-specified PenDrive Cloud Server"
                printf "\n"
                printf "\n\tpendrive   -u   file.ext    \e[1;3;163m--server=\e[0m\e[3m[\"server.io\"]\e[0m   \t# Upload a file to user-specified PenDrive Cloud Server"
@@ -500,7 +501,7 @@ then
 
                printf "\n\n\e[1;163mVERSION\e[0m"
                printf "\n\t\e[3;7mBeta\e[0m"
-               printf " 0.1"
+               printf " 0.1.6.4.2017"
 
                printf "\n\n\e[1;163mAUTHOR\e[0m"
                printf "\n\tWritten by Saumil Shah."

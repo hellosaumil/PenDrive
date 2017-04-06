@@ -57,7 +57,7 @@ Describes all Options of PenDrive on Cloud
 ```shell
 	pendrive                			# Displays Man Page of pendrive
 
-	pendrive   --upgrade          		# Upgrade PenDrive from Cloud
+	pendrive   --upgrade          			# Upgrade PenDrive from Cloud
 
 	pendrive   -l           			# Lists all files on PenDrive Cloud
 

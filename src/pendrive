@@ -1,9 +1,7 @@
 #@(#)Code for Web Pendrive. Developed By: Saumil Shah"
 clear
 
-server="http://0f84cd14.ngrok.io"
-# server="http://localhost:8080"
-# server="0.0.0.0:8080"
+server="10.20.24.48:8080"
 
 if [ $# -gt 0 ]
 then
@@ -67,6 +65,99 @@ then
                printf "\e[3;96m `curl -sX GET "$server/pendrive"` \n\e[0m"
 
                printf "\n"
+
+          elif [ $1 == "--upgrade" ]
+          then
+               if [ $# -gt 1 -a "$server_flag" == "-none" ]
+               then
+                    printf "\n\e[1;31mUnncessary Arguments after --upgrade\e[0m"
+                    printf "\n\e[1;96mUsage: pendrive [OPTION] \e[0m"
+                    printf "\n\e[1;96mUsage: pendrive --upgrade\n\e[0m"
+                    exit 101
+               fi
+
+               clear
+               printf "\nUpgrading..."
+
+                    mkdir -p ~/.PenDrive
+
+                    printf "\nSetting Up PenDrive"
+                    printf "\n\nDownloading PenDrive..."
+                    x=`echo ~`
+                    full=`echo "$x/.PenDrive/pendrive-new"`
+                    sudo curl -\# https://raw.githubusercontent.com/hellosaumil/PenDrive/master/src/pendrive --output $full
+                    printf "\n\nPenDrive Downloaded!"
+
+                    os_flag="-none"
+                    case "$OSTYPE" in
+                      linux*)
+                    			printf "\nLinux\n"
+
+                                   z=$(cat ~/.bashrc | grep "export PATH=\$PATH:~/.PenDrive/")
+                                   if [ "$z" == " " -o "$z" == "" ];
+                                   then
+                                        printf "Aliasing..."
+                                        printf "\nexport PATH=\$PATH:~/.PenDrive/" >> ~/.bashrc
+                         			printf "\nalias pendrive=\"~/.PenDrive/pendrive\"" >> ~/.bashrc;
+                                   else
+                                        printf "Aliased!";
+                                    fi
+
+                                   source ~/.bashrc
+                                   sudo chmod +x ~/.PenDrive/pendrive-new
+                    			printf "\n\nAlias created as \e[1;3;163mpendrive \e[0m"
+                                   os_flag=True
+                    			;;
+                      darwin*)
+                    			printf "\nDarwin\n"
+                                   z=$(cat ~/.bash_profile | grep "export PATH=\$PATH:~/.PenDrive/")
+                                   if [ "$z" == " " -o "$z" == "" ];
+                                   then
+                                        printf "Aliasing..."
+                                        printf "\nexport PATH=\$PATH:~/.PenDrive/" >> ~/.bash_profile
+                         			printf "\nalias pendrive=\"~/.PenDrive/pendrive\"" >> ~/.bash_profile;
+                                   else
+                                        printf "Aliased!";
+                                    fi
+
+                                   source ~/.bash_profile
+                    			sudo chmod +x ~/.PenDrive/pendrive-new
+
+                                   printf "\n\nAlias created as \e[1;3;163mpendrive \e[0m"
+                                   os_flag=True
+                    			;;
+                    	*)		printf "\nUnknown OS-Type: $OSTYPE"
+                    esac
+
+                    if [ os_flag != "-none" ]
+                    then
+                              printf "\n$os_flag\n\n"
+                              printf "\n\e[1;163mSYNOPSIS\e[0m"
+                              printf "\n\t\e[1;163mpendrive\e[0m"
+                              printf " [OPTION]... [FILE]... [TEXT]... [TOKEN]... [SERVER]..."
+
+                         printf "\n\nOpen New Tab see it in Action!"
+                         printf "\n\nPenDrive SetUp Successfully !!!\n"
+
+                         x=`echo ~`
+                         full=`echo "$x/.PenDrive/pendrive"`
+                         fullnew=`echo "$x/.PenDrive/pendrive-new"`
+                         fullupdater=`echo "$x/.PenDrive/updater"`
+
+                         echo 'sudo rm '$full'; sudo mv '$fullnew $full'; printf "\nUpdation Successfull!"' >> $fullupdater
+
+                         sudo sh $fullupdater
+                         sudo rm $fullupdater
+
+                    else
+                         printf "\n\nError in setting up PenDrive"
+                         printf "\n\tReport bugs to "
+                         printf "\e[3;4mhttps://github.com/hellosaumil/PenDrive/issues\e[0m"
+                    fi
+
+
+               printf "\n"
+
 
           elif [ $1 == "-u" ]
           then

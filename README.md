@@ -57,7 +57,7 @@ Describes all Options of PenDrive on Cloud
 ```shell
 	pendrive                			# Displays Man Page of pendrive
 
-	pendrive   --upgrade          	# Upgrade PenDrive from Cloud
+	pendrive   --upgrade          		# Upgrade PenDrive from Cloud
 
 	pendrive   -l           			# Lists all files on PenDrive Cloud
 
@@ -65,10 +65,10 @@ Describes all Options of PenDrive on Cloud
 	pendrive   -d   file.ext			# Download a file from PenDrive Cloud
 
 	pendrive   -c   copyText			# Copy Text to PenDrive Cloud; User will be asked to provide a Token
-	pendrive   -p   pasteToken		# Paste Text to PenDrive Cloud
+	pendrive   -p   pasteToken			# Paste Text to PenDrive Cloud
 
 	pendrive   -r   file.ext			# Remove a file on PenDrive Cloud
-	pendrive   -rp  pasteToken		# Remove Shared Text from PenDrive Cloud using a user-specified Token
+	pendrive   -rp  pasteToken			# Remove Shared Text from PenDrive Cloud using a user-specified Token
 
 	pendrive   -h           			# Provides Help for using PenDrive Cloud
 ```

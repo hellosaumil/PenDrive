@@ -211,6 +211,7 @@ then
                     printf "\n\e[1;31mInsufficient Arguments for -c\e[0m"
                     printf "\n\e[1;96mUsage: pendrive [OPTION] [TEXT]\e[0m"
                     printf "\n\e[1;96mUsage: pendrive -c copyText\n\e[0m"
+                    printf "and User will be asked to provide Token"
                     exit 102
                fi
 

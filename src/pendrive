@@ -195,7 +195,7 @@ then
                     then
                          printf "\t $file located"
                          printf "\n\nUploading $file...\n"
-                         status=`curl -s -X POST --form "sharingType=upload" --form "fileName=$file" --form "data=@$fileX" "$server/pendrive"`
+                         status=`curl -\#X POST --form "sharingType=upload" --form "fileName=$file" --form "data=@$fileX" "$server/pendrive"`
                          printf "\n\e[1;96m$status\e[0m"
                     else
                          printf "\n\e[1;31mInvalid File Name Requested to upload...!\e[0m"
